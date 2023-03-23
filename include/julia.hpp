@@ -5,7 +5,7 @@
 #include "const.hpp"
 #include "image_config.hpp"
 
-int mandelbrot(ImageConfig image_config)
+int julia(ImageConfig image_config)
 {
   // 画像の幅と高さを指定する
   int width = image_config.width;
@@ -23,7 +23,7 @@ int mandelbrot(ImageConfig image_config)
     row_pointers[y] = (png_byte *)malloc(sizeof(png_byte) * width * 4);
   }
 
-  // マンデルブロ集合を描写する
+  // ジュリア集合を描写する
   for (int y = 0; y < height; y++)
   {
     png_bytep row = row_pointers[y];
@@ -35,25 +35,25 @@ int mandelbrot(ImageConfig image_config)
       px[2] = 0;               // 青
       px[3] = MAX_COLOR_VALUE; // 不透明度
 
-      // マンデルブロ集合の計算を行う
+      // ジュリア集合の計算を行う
       mpf_class x0 = x_min + (x_max - x_min) * mpf_class(x, CALC_PRECISION) / mpf_class(width, CALC_PRECISION);
       mpf_class y0 = y_min + (y_max - y_min) * mpf_class(y, CALC_PRECISION) / mpf_class(height, CALC_PRECISION);
-      mpf_class x1 = mpf_class(0.0, CALC_PRECISION);
-      mpf_class y1 = mpf_class(0.0, CALC_PRECISION);
+      mpf_class x1 = x0;
+      mpf_class y1 = y0;
       int i = 0;
       while (x1 * x1 + y1 * y1 <= 2 * 2 && i < MAX_ITERATIONS)
       {
-        mpf_class x2 = x1 * x1 - y1 * y1 + x0;
-        mpf_class y2 = 2 * x1 * y1 + y0;
+        mpf_class x2 = x1 * x1 - y1 * y1 + mpf_class(image_config.cx, CALC_PRECISION);
+        mpf_class y2 = 2 * x1 * y1 + mpf_class(image_config.cy, CALC_PRECISION);
         x1 = x2;
         y1 = y2;
         i++;
       }
 
-      // マンデルブロ集合の計算結果を色に変換する
+      // ジュリア集合の計算結果を色に変換する
       int color = i * MAX_COLOR_VALUE / MAX_ITERATIONS;
-      px[0] = color;
-      px[1] = 0;
+      px[0] = 0;
+      px[1] = color;
       px[2] = 0;
       px[3] = MAX_COLOR_VALUE;
     }

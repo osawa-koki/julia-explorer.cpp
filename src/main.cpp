@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
         opt.filesize_height,
         upper_left,
         lower_right,
+        opt.cx,
+        opt.cy,
         mpf_class(1, CALC_PRECISION) + mpf_class(i, CALC_PRECISION) / mpf_class(opt.upto - opt.from, CALC_PRECISION)};
     julia(image_config);
   }
