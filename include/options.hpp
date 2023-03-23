@@ -14,6 +14,8 @@ struct Options
   float filesize_height;
   mpf_class start_x;
   mpf_class start_y;
+  float cx;
+  float cy;
   mpf_class default_width;
   mpf_class default_height;
 };

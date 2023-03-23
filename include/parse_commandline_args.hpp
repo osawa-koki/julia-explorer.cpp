@@ -37,6 +37,8 @@ Options parse_commandline_args(int argc, char *argv[])
   opt.filesize_height = std::stof(options["filesize-height"]);
   opt.start_x = mpf_class(options["start-x"], CALC_PRECISION);
   opt.start_y = mpf_class(options["start-y"], CALC_PRECISION);
+  opt.cx = std::stof(options["cx"]);
+  opt.cy = std::stof(options["cy"]);
   opt.default_width = mpf_class(options["default-width"], CALC_PRECISION);
   opt.default_height = mpf_class(options["default-height"], CALC_PRECISION);
 

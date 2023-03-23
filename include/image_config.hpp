@@ -12,6 +12,8 @@ struct ImageConfig
   int height;
   std::complex<mpf_class> upper_left;
   std::complex<mpf_class> lower_right;
+  float cx;
+  float cy;
   mpf_class progress;
 };
 
