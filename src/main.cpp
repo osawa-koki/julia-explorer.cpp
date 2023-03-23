@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     threads[i] = std::thread([&target_directory, &opt, thread_start, thread_end]() {
       for (int i = thread_start; i <= thread_end; i++) {
         // 進捗を表示
-        std::cout << "=====> " << (int)(i / (float)opt.upto * 100) << " %" << std::endl;
+        std::cout << "=====> running..." << std::endl;
 
         std::string filename = target_directory + zero_padding(i, 8) + ".png";
         mpf_class shrink = mpf_class(opt.shrink_ratio, CALC_PRECISION);
